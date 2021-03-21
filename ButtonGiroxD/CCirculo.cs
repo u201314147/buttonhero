@@ -15,14 +15,20 @@ namespace ButtonGiroxD
         int alto;
         int tipo;
         int hit;
+        int hitcount;
+        int hitLast;
         Color ColorC;
         Brush p1;
 
-        public CCirculo(int pY, int pTipo)
+        public CCirculo(int pY, int pX, int pTipo, int phitCount, int plasthit)
         {
-            x = 0;
-            y = pY*74 - 60;
-            ancho = 100;
+            hitLast = plasthit;
+            hitcount = phitCount;
+            x = pX;
+            //y = pY*74 - 60;
+            y = pY - 60;
+
+            ancho = 50;
             alto = 50;
             tipo = pTipo;
             hit = 0;
@@ -31,27 +37,28 @@ namespace ButtonGiroxD
             if (tipo == 1)
             {
                 ColorC = Color.Green;
-                x = 50;
+               // x = pX;
             }
             if (tipo == 2)
             {
                 ColorC = Color.Red;
-                x = 150;
+               // x = 150;
             }
             if (tipo == 3)
             {
-                ColorC = Color.Yellow;
-                x = 250;
+                ColorC = Color.Pink;
+               // x = 250;
             }
             if (tipo == 4)
             {
                 ColorC = Color.Blue;
-                x = 350;
+               // x = 350;
             }
-            if (tipo == 5)
+            if (tipo >= 5)
             {
-                ColorC = Color.Orange;
-                x = 450;
+               
+               ColorC = Color.Orange;
+               // x = 450;
             }
             p1 = new SolidBrush(ColorC);   
     
@@ -62,25 +69,91 @@ namespace ButtonGiroxD
         {
             if (y > -100 && y < 700)
             {
-                g.FillEllipse(p1, x, y , ancho, alto);
-                g.DrawEllipse(Pens.Black, x, y , ancho, alto);
+                        g.FillEllipse(p1, x, y, ancho, alto);
+                g.DrawEllipse(Pens.Black, x, y, ancho, alto);
+
+
+
+                if (tipo == 1)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("△", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 2)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("O", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 3)
+                {
+                    Point p = new Point(x + 15, y + 15);
+                    Size s = new Size(20, 20);
+                    Rectangle rect = new Rectangle(p, s);
+                    g.DrawRectangle(Pens.Black, rect);
+                }
+                if (tipo == 4)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("X", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 5)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("←", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 6)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("→", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 7)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("↑", drawFont, Brushes.Black, p);
+                }
+                if (tipo == 8)
+                {
+                    Font drawFont = new Font("Arial Black", 25);
+                    Point p = new Point(x, y);
+                    g.DrawString("↓", drawFont, Brushes.Black, p);
+                }
             }
         }
 
-        public void mover()
+        public void mover(int pmover)
         {
-            y = y +5;
+            y = y +pmover;
         }
 
         public void hitV()
         {
-            if (y > 405 && y < 505)
+            if (hitLast == 0)
             {
-                hit = 1;
+                if (y > 0 && y < 450)
+                {
+                    hit = 1;
+                }
             }
-          
-        }
 
+            if (hitLast == 1)
+            {
+                if (y > 451 && y < 555)
+                {
+                    hit = 1;
+                }
+            }
+        }
+        public int getHitCount()
+        {
+            return hitcount;
+        }
+        
         public int getHit()
         {
             return hit;
