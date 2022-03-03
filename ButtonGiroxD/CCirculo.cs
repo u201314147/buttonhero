@@ -10,7 +10,7 @@ namespace ButtonGiroxD
     public class CCirculo
     {
         int x;
-        int y;
+        double y;
         int ancho;
         int alto;
         int tipo;
@@ -20,7 +20,7 @@ namespace ButtonGiroxD
         Color ColorC;
         Brush p1;
 
-        public CCirculo(int pY, int pX, int pTipo, int phitCount, int plasthit)
+        public CCirculo(double pY, int pX, int pTipo, int phitCount, int plasthit)
         {
             hitLast = plasthit;
             hitcount = phitCount;
@@ -67,28 +67,30 @@ namespace ButtonGiroxD
     
         public void dibujar(Graphics g)
         {
+            int y2 = Int32.Parse(y.ToString());
+    
             if (y > -100 && y < 700)
             {
-                        g.FillEllipse(p1, x, y, ancho, alto);
-                g.DrawEllipse(Pens.Black, x, y, ancho, alto);
+                        g.FillEllipse(p1, x, y2, ancho, alto);
+                g.DrawEllipse(Pens.Black, x, y2, ancho, alto);
 
 
 
                 if (tipo == 1)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("△", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 2)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("O", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 3)
                 {
-                    Point p = new Point(x + 15, y + 15);
+                    Point p = new Point(x + 15, y2 + 15);
                     Size s = new Size(20, 20);
                     Rectangle rect = new Rectangle(p, s);
                     g.DrawRectangle(Pens.Black, rect);
@@ -96,37 +98,37 @@ namespace ButtonGiroxD
                 if (tipo == 4)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("X", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 5)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("←", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 6)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("→", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 7)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("↑", drawFont, Brushes.Black, p);
                 }
                 if (tipo == 8)
                 {
                     Font drawFont = new Font("Arial Black", 25);
-                    Point p = new Point(x, y);
+                    Point p = new Point(x, y2);
                     g.DrawString("↓", drawFont, Brushes.Black, p);
                 }
             }
         }
 
-        public void mover(int pmover)
+        public void mover(double pmover)
         {
             y = y +pmover;
         }

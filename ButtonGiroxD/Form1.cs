@@ -12,14 +12,16 @@ namespace ButtonGiroxD
 {
     public partial class Form1 : Form
     {
-        int bpmreset = 170;
+        double bpmreset = 170.0;
         Random y = new Random();
         Random x = new Random();
         Random r = new Random();
 
+        
         int maxNotas = 0;
-        int speed = 0;
-        int bpmcount =0;
+        double bpmadded = 0;
+        double speed = 0;
+        double bpmcount =0;
         int an1 = 0;
         int minitimerA1 = 0;
         int an2 = 0;
@@ -45,23 +47,24 @@ namespace ButtonGiroxD
         int tab8;
         String file;
         List<CCirculo> Circulo;
-        		 System.Media.SoundPlayer player;
+        List<CCirculo> Circulos2;
+        System.Media.SoundPlayer player;
                 
                  WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
                  WMPLib.WindowsMediaPlayer wplayer2 = new WMPLib.WindowsMediaPlayer();
 
-        public Form1(int bpm, int repeattime, int maxNotes, int pTimeWait, String pFile)
+        public Form1(double bpm, double repeattime, int maxNotes, int pTimeWait, double bpmadd, String pFile)
         {
             speed = bpm;
             bpmreset = repeattime;
             maxNotas = maxNotes;
-
+            bpmadded = bpmadd;
             timeEspera = pTimeWait;
             bpmcount = bpmcount - timeEspera;
             file = pFile;
             player = new System.Media.SoundPlayer();
             player.SoundLocation = "slash5.wav";
-            
+            Circulos2 = new List<CCirculo>();
             Circulo = new List<CCirculo>();
             InitializeComponent();
 
@@ -79,14 +82,23 @@ namespace ButtonGiroxD
 
             Circulo.Add(circ = new CCirculo(pY, pX, pTipo, phitCount, plasthit));
         }
-        
+
+        private void AddCirc2(int pY, int pX, int pTipo, int phitCount, int plasthit)
+        {
+            CCirculo circ;
+
+            Circulos2.Add(circ = new CCirculo(pY, pX, pTipo, phitCount, plasthit));
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-            bpmcount++;
+            bpmcount = bpmcount + bpmadded;
 
             if (bpmcount > bpmreset)
             {
+                Circulo.Clear();
+                Circulos2.Clear();
                 int max = y.Next(0, maxNotas);
                 for (int i = 0; i <=max; i++)
                     {
@@ -94,20 +106,36 @@ namespace ButtonGiroxD
                     int select = x.Next(1, 9);
                     int select2 = r.Next(select, 9);
 
+                    int selectrandom = x.Next(select, select2);
+                    int selectmax = r.Next(1, 6);
                     if (i<max)
-                        AddCirc(-10, 50+ i*50,x.Next(select, select2), i+1, 0);
+                        AddCirc(-10, 50+ i*50, selectrandom, i+1, 0);
 
 
 
                         if(i==max)
-                            AddCirc(-10, 50  +i * 50, r.Next(1, 6), i+1, 1);
-                    }
+                            AddCirc(-10, 50  +i * 50, selectmax, i+1, 1);
+
+
+                        //AGREGADO VISION 
+                 
+
+                    if (i < max)
+                        AddCirc2(300, 50 + i * 50, selectrandom, i + 1, 0);
+
+
+                    if (i == max)
+                        AddCirc2(300, 50 + i * 50, selectmax, i + 1, 1);
+                }
                    
                 
              
                 phitcount = 1;
                 bpmcount = 0;
             }
+
+
+           
 
             if (score < 0)
                 score = 0;
@@ -139,9 +167,7 @@ namespace ButtonGiroxD
             buffer.Graphics.DrawRectangle(Pens.Black, 450, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 550, 0, 1, 600);
 
-
-
-            foreach (CCirculo c in Circulo)
+                foreach (CCirculo c in Circulo)
             {
                 c.dibujar(buffer.Graphics);
                 c.mover(speed);
@@ -301,7 +327,13 @@ namespace ButtonGiroxD
                 }
             }
 
-          
+            //SE DIBUJAN AL FINAL
+            foreach (CCirculo c in Circulos2)
+            {
+                c.dibujar(buffer.Graphics);
+
+            }
+
             label1.Text ="Score :" + score.ToString() + " Count: " + phitcount.ToString();
 
             /*if (megatimer == 4800)
@@ -332,6 +364,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.W)
                 {
                     tab1 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 1 && c.getHit() == 1 && c.getHitCount() == phitcount)
@@ -340,10 +373,12 @@ namespace ButtonGiroxD
                             score = score + 45;
 
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //        player.Play();
                             wplayer.settings.volume = 100;
+                            i = i + 1;
                             return;
                         }
                     }
@@ -354,6 +389,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.D)
                 {
                     tab2 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
 
@@ -362,11 +398,13 @@ namespace ButtonGiroxD
                             an2 = 1;
                             score = score + 45;
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //player.SoundLocation = "kick.wav";
                             //player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -379,6 +417,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.A)
                 {
                     tab3 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 3 && c.getHit() == 1 && c.getHitCount() == phitcount)
@@ -386,11 +425,13 @@ namespace ButtonGiroxD
                             an3 = 1;
                             score = score + 45;
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //        player.SoundLocation = "kick.wav";
                             //      player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -403,6 +444,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.S)
                 {
                     tab4 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 4 && c.getHit() == 1 && c.getHitCount() == phitcount)
@@ -410,11 +452,13 @@ namespace ButtonGiroxD
                             an4 = 1;
                             score = score + 45;
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //         player.SoundLocation = "kick.wav";
                             //       player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -428,6 +472,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.Left)
                 {
                     tab5 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 5 && c.getHit() == 1 && c.getHitCount() == phitcount)
@@ -435,11 +480,13 @@ namespace ButtonGiroxD
                             an5 = 1;
                             score = score + 45;
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -452,18 +499,24 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.Right)
                 {
                     tab6 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 6 && c.getHit() == 1 && c.getHitCount() == phitcount)
                         {
+                        
                            // an5 = 1;
                             score = score + 45;
+                            
                             Circulo.Remove(c);
-                           // wplayer.settings.volume = 100;
+                            Circulos2.RemoveAt(i);
+                            
+                            // wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -476,18 +529,22 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.Up)
                 {
                     tab7 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 7 && c.getHit() == 1 && c.getHitCount() == phitcount)
                         {
                             // an5 = 1;
                             score = score + 45;
+
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             // wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -500,6 +557,7 @@ namespace ButtonGiroxD
                 if (e.KeyCode == Keys.Down)
                 {
                     tab8 = 1;
+                    int i = 0;
                     foreach (CCirculo c in Circulo)
                     {
                         if (c.getTipo() == 8 && c.getHit() == 1 && c.getHitCount() == phitcount)
@@ -507,11 +565,13 @@ namespace ButtonGiroxD
                             // an5 = 1;
                             score = score + 45;
                             Circulo.Remove(c);
+                            Circulos2.RemoveAt(i);
                             // wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            i = i + 1;
                             return;
                         }
                     }
@@ -600,6 +660,11 @@ namespace ButtonGiroxD
         {
 
             wplayer2.controls.pause();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -24,26 +24,29 @@ namespace ButtonGiroxD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int bmpspeed = 0;
-            int repeattime = 0;
+            double bmpspeed = 0;
+            double repeattime = 0;
             int maxNotes = 0;
             int wait = 0;
+            double bmpadd = 0;
             String music = "";
             try
             {
-                 bmpspeed = int.Parse(txtSpeed.Text);
-                 repeattime = int.Parse(txtRepeat.Text);
+                 bmpspeed = double.Parse(txtSpeed.Text);
+                 repeattime = double.Parse(txtRepeat.Text);
                  maxNotes = int.Parse(txtMaxNotes.Text);
                  wait = int.Parse(txtWaitTime.Text);
                  music = txtMusic.Text;
+                bmpadd = double.Parse(textBox1  .Text);
             }
             catch (Exception f)
             {
                 MessageBox.Show(f.ToString());
             }
 
+            
 
-            Form1 form = new Form1(bmpspeed, repeattime, maxNotes, wait, music);
+            Form1 form = new Form1(bmpspeed, repeattime, maxNotes, wait, bmpadd, music);
             form.Show();
         }
 
@@ -59,6 +62,16 @@ namespace ButtonGiroxD
             {
                 txtMusic.Text = fdlg.FileName;
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
