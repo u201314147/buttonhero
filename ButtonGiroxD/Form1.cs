@@ -377,6 +377,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //        player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             wplayer.settings.volume = 100;
                             i = i + 1;
                             return;
@@ -404,6 +409,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //player.SoundLocation = "kick.wav";
                             //player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -431,6 +441,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //        player.SoundLocation = "kick.wav";
                             //      player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -458,6 +473,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //         player.SoundLocation = "kick.wav";
                             //       player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -486,6 +506,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -516,6 +541,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -544,6 +574,11 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -566,11 +601,17 @@ namespace ButtonGiroxD
                             score = score + 45;
                             Circulo.Remove(c);
                             Circulos2.RemoveAt(i);
+                           
                             // wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
+                            if (Circulos2.Count == 0)
+                            {
+                                player.SoundLocation = "sfx/kick2.wav";
+                                player.Play();
+                            }
                             i = i + 1;
                             return;
                         }
@@ -639,7 +680,7 @@ namespace ButtonGiroxD
                wplayer.controls.play();
                 wplayer2.controls.play();
 
-                wplayer2.settings.volume = 50;
+                wplayer2.settings.volume = 40;
                
                 timer2.Enabled = false;
             
