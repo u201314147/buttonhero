@@ -170,7 +170,7 @@ namespace ButtonGiroxD
                 foreach (CCirculo c in Circulo)
             {
                 c.dibujar(buffer.Graphics);
-                c.mover(20.0f);
+                c.mover(speed);
                 c.hitV();
                 if (c.dropMusic() == 1)
                     wplayer.settings.volume = 0;
@@ -361,7 +361,7 @@ namespace ButtonGiroxD
             }
             if (minitimer<2)
             {
-                if (e.KeyCode == Keys.Z)
+                if (e.KeyCode == Keys.W)
                 {
                     tab1 = 1;
                     int i = 0;
@@ -377,11 +377,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //        player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             wplayer.settings.volume = 100;
                             i = i + 1;
                             return;
@@ -391,7 +386,7 @@ namespace ButtonGiroxD
                  //   player.Play();
                 }
 
-                if (e.KeyCode == Keys.X)
+                if (e.KeyCode == Keys.D)
                 {
                     tab2 = 1;
                     int i = 0;
@@ -409,11 +404,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //player.SoundLocation = "kick.wav";
                             //player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -424,7 +414,7 @@ namespace ButtonGiroxD
                
                 }
                 
-                if (e.KeyCode == Keys.C)
+                if (e.KeyCode == Keys.A)
                 {
                     tab3 = 1;
                     int i = 0;
@@ -441,11 +431,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //        player.SoundLocation = "kick.wav";
                             //      player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -456,7 +441,7 @@ namespace ButtonGiroxD
                            
                 }
 
-                if (e.KeyCode == Keys.V)
+                if (e.KeyCode == Keys.S)
                 {
                     tab4 = 1;
                     int i = 0;
@@ -473,11 +458,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //         player.SoundLocation = "kick.wav";
                             //       player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -506,11 +486,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -541,11 +516,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -574,11 +544,6 @@ namespace ButtonGiroxD
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -601,17 +566,11 @@ namespace ButtonGiroxD
                             score = score + 45;
                             Circulo.Remove(c);
                             Circulos2.RemoveAt(i);
-                           
                             // wplayer.settings.volume = 100;
 
                             phitcount = phitcount + 1;
                             //      player.SoundLocation = "kick.wav";
                             //    player.Play();
-                            if (Circulos2.Count == 0)
-                            {
-                                player.SoundLocation = "sfx/kick2.wav";
-                                player.Play();
-                            }
                             i = i + 1;
                             return;
                         }
@@ -632,19 +591,19 @@ namespace ButtonGiroxD
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Z)
+            if (e.KeyCode == Keys.W)
             {
                 tab1 = 0;
             }
-            if (e.KeyCode == Keys.X)
+            if (e.KeyCode == Keys.D)
             {
                 tab2 = 0;
             }
-            if (e.KeyCode == Keys.C)
+            if (e.KeyCode == Keys.A)
             {
                 tab3 = 0;
             }
-            if (e.KeyCode == Keys.V)
+            if (e.KeyCode == Keys.S)
             {
                 tab4 = 0;
             }
@@ -680,7 +639,7 @@ namespace ButtonGiroxD
                wplayer.controls.play();
                 wplayer2.controls.play();
 
-                wplayer2.settings.volume = 40;
+                wplayer2.settings.volume = 50;
                
                 timer2.Enabled = false;
             

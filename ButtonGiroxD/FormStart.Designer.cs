@@ -68,7 +68,7 @@
             this.txtMaxNotes.Name = "txtMaxNotes";
             this.txtMaxNotes.Size = new System.Drawing.Size(100, 20);
             this.txtMaxNotes.TabIndex = 2;
-            this.txtMaxNotes.Text = "5";
+            this.txtMaxNotes.Text = "10";
             // 
             // txtRepeat
             // 
@@ -76,7 +76,7 @@
             this.txtRepeat.Name = "txtRepeat";
             this.txtRepeat.Size = new System.Drawing.Size(100, 20);
             this.txtRepeat.TabIndex = 2;
-            this.txtRepeat.Text = "170.00";
+            this.txtRepeat.Text = "170";
             // 
             // label1
             // 
@@ -99,11 +99,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 83);
+            this.label3.Location = new System.Drawing.Point(75, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 13);
+            this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Maximo Notas (máx. 10)";
+            this.label3.Text = "Maximo Notas";
             // 
             // txtWaitTime
             // 
