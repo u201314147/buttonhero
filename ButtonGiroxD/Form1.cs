@@ -170,7 +170,7 @@ namespace ButtonGiroxD
                 foreach (CCirculo c in Circulo)
             {
                 c.dibujar(buffer.Graphics);
-                c.mover(speed);
+                c.mover(20.0f);
                 c.hitV();
                 if (c.dropMusic() == 1)
                     wplayer.settings.volume = 0;
@@ -361,7 +361,7 @@ namespace ButtonGiroxD
             }
             if (minitimer<2)
             {
-                if (e.KeyCode == Keys.NumPad7)
+                if (e.KeyCode == Keys.Z)
                 {
                     tab1 = 1;
                     int i = 0;
@@ -391,7 +391,7 @@ namespace ButtonGiroxD
                  //   player.Play();
                 }
 
-                if (e.KeyCode == Keys.NumPad3)
+                if (e.KeyCode == Keys.X)
                 {
                     tab2 = 1;
                     int i = 0;
@@ -424,7 +424,7 @@ namespace ButtonGiroxD
                
                 }
                 
-                if (e.KeyCode == Keys.NumPad4)
+                if (e.KeyCode == Keys.C)
                 {
                     tab3 = 1;
                     int i = 0;
@@ -456,7 +456,7 @@ namespace ButtonGiroxD
                            
                 }
 
-                if (e.KeyCode == Keys.NumPad1)
+                if (e.KeyCode == Keys.V)
                 {
                     tab4 = 1;
                     int i = 0;
@@ -489,7 +489,7 @@ namespace ButtonGiroxD
                        
                 }
 
-                if (e.KeyCode == Keys.A)
+                if (e.KeyCode == Keys.Left)
                 {
                     tab5 = 1;
                     int i = 0;
@@ -521,7 +521,7 @@ namespace ButtonGiroxD
                   
                 }
 
-                if (e.KeyCode == Keys.D)
+                if (e.KeyCode == Keys.Right)
                 {
                     tab6 = 1;
                     int i = 0;
@@ -556,7 +556,7 @@ namespace ButtonGiroxD
 
                 }
 
-                if (e.KeyCode == Keys.W)
+                if (e.KeyCode == Keys.Up)
                 {
                     tab7 = 1;
                     int i = 0;
@@ -589,7 +589,7 @@ namespace ButtonGiroxD
 
                 }
 
-                if (e.KeyCode == Keys.S)
+                if (e.KeyCode == Keys.Down)
                 {
                     tab8 = 1;
                     int i = 0;
@@ -632,35 +632,35 @@ namespace ButtonGiroxD
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.NumPad7)
+            if (e.KeyCode == Keys.Z)
             {
                 tab1 = 0;
             }
-            if (e.KeyCode == Keys.NumPad3)
+            if (e.KeyCode == Keys.X)
             {
                 tab2 = 0;
             }
-            if (e.KeyCode == Keys.NumPad4)
+            if (e.KeyCode == Keys.C)
             {
                 tab3 = 0;
             }
-            if (e.KeyCode == Keys.NumPad1)
+            if (e.KeyCode == Keys.V)
             {
                 tab4 = 0;
             }
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.Left)
             {
                 tab5 = 0;
             }
-            if (e.KeyCode == Keys.D)
+            if (e.KeyCode == Keys.Right)
             {
                 tab6 = 0;
             }
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.Up)
             {
                 tab7 = 0;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.Down)
             {
                 tab8 = 0;
             }
