@@ -17,7 +17,8 @@ namespace ButtonGiroxD
         Random x = new Random();
         Random r = new Random();
 
-        
+        int frame = 0;
+        int frameskip = 5;
         int maxNotas = 0;
         double bpmadded = 0;
         double speed = 0;
@@ -52,6 +53,8 @@ namespace ButtonGiroxD
                 
                  WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
                  WMPLib.WindowsMediaPlayer wplayer2 = new WMPLib.WindowsMediaPlayer();
+       
+
 
         public Form1(double bpm, double repeattime, int maxNotes, int pTimeWait, double bpmadd, String pFile)
         {
@@ -66,6 +69,11 @@ namespace ButtonGiroxD
             player.SoundLocation = "slash5.wav";
             Circulos2 = new List<CCirculo>();
             Circulo = new List<CCirculo>();
+
+
+             wplayer2.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
+          
+
             InitializeComponent();
 
         button1.Enabled = false;
@@ -74,6 +82,20 @@ namespace ButtonGiroxD
 
            
 
+        }
+
+
+         private void wplayer_PlayStateChange(int NewState)
+          {
+              if (NewState == (int)WMPLib.WMPPlayState.wmppsMediaEnded)
+              {
+                timer1.Enabled = false;
+                MessageBox.Show("TU PUNTAJE FINAL ES: " + score);
+
+                
+                this.Close();
+              }
+           
         }
 
         private void AddCirc(int pY, int pX, int pTipo, int phitCount, int plasthit)
@@ -92,7 +114,7 @@ namespace ButtonGiroxD
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            frame = frame + 1;
             bpmcount = bpmcount + bpmadded;
 
             if (bpmcount > bpmreset)
@@ -100,25 +122,25 @@ namespace ButtonGiroxD
                 Circulo.Clear();
                 Circulos2.Clear();
                 int max = y.Next(0, maxNotas);
-                for (int i = 0; i <=max; i++)
-                    {
-                   
+                for (int i = 0; i <= max; i++)
+                {
+
                     int select = x.Next(1, 9);
                     int select2 = r.Next(select, 9);
 
                     int selectrandom = x.Next(select, select2);
                     int selectmax = r.Next(1, 6);
-                    if (i<max)
-                        AddCirc(-10, 50+ i*50, selectrandom, i+1, 0);
+                    if (i < max)
+                        AddCirc(-10, 50 + i * 50, selectrandom, i + 1, 0);
 
 
 
-                        if(i==max)
-                            AddCirc(-10, 50  +i * 50, selectmax, i+1, 1);
+                    if (i == max)
+                        AddCirc(-10, 50 + i * 50, selectmax, i + 1, 1);
 
 
-                        //AGREGADO VISION 
-                 
+                    //AGREGADO VISION 
+
 
                     if (i < max)
                         AddCirc2(300, 50 + i * 50, selectrandom, i + 1, 0);
@@ -127,28 +149,33 @@ namespace ButtonGiroxD
                     if (i == max)
                         AddCirc2(300, 50 + i * 50, selectmax, i + 1, 1);
                 }
-                   
-                
-             
+
+
+
                 phitcount = 1;
                 bpmcount = 0;
             }
 
 
-           
+
 
             if (score < 0)
                 score = 0;
+
+            if (frame == frameskip)
+            {
+
+            
             Graphics g = this.CreateGraphics();
             BufferedGraphicsContext contexto = BufferedGraphicsManager.Current;
             BufferedGraphics buffer = contexto.Allocate(g, this.DisplayRectangle);
-           //buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            buffer.Graphics.Clear(Color.White);
+            //buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            buffer.Graphics.Clear(Color.Black);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 500, 500, 50);
-            
+
             buffer.Graphics.FillRectangle(Brushes.LightGray, 54, 1, 495, 600);
 
-            buffer.Graphics.DrawRectangle(Pens.Black, 50, 500, 500, 50);
+            /*buffer.Graphics.DrawRectangle(Pens.Black, 50, 500, 500, 50);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 450, 500, 50);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 400, 500, 50);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 350, 500, 50);
@@ -160,31 +187,40 @@ namespace ButtonGiroxD
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 50, 500, 50);
 
 
-            buffer.Graphics.DrawRectangle(Pens.Black, 50, 0, 1, 600); 
+            buffer.Graphics.DrawRectangle(Pens.Black, 50, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 150, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 250, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 350, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 450, 0, 1, 600);
             buffer.Graphics.DrawRectangle(Pens.Black, 550, 0, 1, 600);
-
-                foreach (CCirculo c in Circulo)
+            */
+            foreach (CCirculo c in Circulo)
             {
                 c.dibujar(buffer.Graphics);
                 c.mover(speed);
                 c.hitV();
                 if (c.dropMusic() == 1)
                     wplayer.settings.volume = 0;
-                }
+            }
 
             buffer.Graphics.FillEllipse(Brushes.DarkGreen, 48, 448, 104, 54);
             buffer.Graphics.FillEllipse(Brushes.DarkRed, 148, 448, 104, 54);
             buffer.Graphics.FillEllipse(Brushes.DeepPink, 248, 448, 104, 54);
             buffer.Graphics.FillEllipse(Brushes.DarkBlue, 348, 448, 104, 54);
             buffer.Graphics.FillEllipse(Brushes.DarkGoldenrod, 448, 448, 104, 54);
+                
+                //SE DIBUJAN AL FINAL
+                foreach (CCirculo c in Circulos2)
+                {
+                    c.dibujar(buffer.Graphics);
 
+                }
+                frame = 0;
 
+                buffer.Render();
 
-            if(tab1==0)
+            }
+            /*if(tab1==0)
             buffer.Graphics.FillEllipse(Brushes.Green, 50, 450, 100, 50);
             else
                 buffer.Graphics.FillEllipse(Brushes.LightGreen, 50, 450, 100, 50);
@@ -209,10 +245,10 @@ namespace ButtonGiroxD
             else
                 buffer.Graphics.FillEllipse(Brushes.Gold, 450, 450, 100, 50);
 
-
+            */
             if (an1 == 1)
             {
-                if(minitimerA1==1)
+               /* if(minitimerA1==1)
                 buffer.Graphics.FillEllipse(Brushes.White, 30, 440, 140, 60);
 
                 if(minitimerA1==2)
@@ -223,7 +259,7 @@ namespace ButtonGiroxD
 
                 if(minitimerA1==4)
                     buffer.Graphics.FillEllipse(Brushes.White, 65, 465, 70, 20);
-
+               */
                 minitimerA1++;
 
                 if (minitimerA1 == 6)
@@ -236,7 +272,7 @@ namespace ButtonGiroxD
 
             if (an2 == 1)
             {
-                if (minitimerA2 == 1)
+                /*if (minitimerA2 == 1)
                     buffer.Graphics.FillEllipse(Brushes.White, 130, 440, 140, 60);
 
                 if (minitimerA2 == 2)
@@ -247,7 +283,7 @@ namespace ButtonGiroxD
 
                 if (minitimerA2 == 4)
                     buffer.Graphics.FillEllipse(Brushes.White, 165, 465, 70, 20);
-
+                */
                 minitimerA2++;
 
                 if (minitimerA2 == 6)
@@ -259,7 +295,7 @@ namespace ButtonGiroxD
 
             if (an3 == 1)
             {
-                if (minitimerA3 == 1)
+                /*if (minitimerA3 == 1)
                     buffer.Graphics.FillEllipse(Brushes.White, 230, 440, 140, 60);
 
                 if (minitimerA3 == 2)
@@ -270,7 +306,7 @@ namespace ButtonGiroxD
 
                 if (minitimerA3 == 4)
                     buffer.Graphics.FillEllipse(Brushes.White, 265, 465, 70, 20);
-
+                */
                 minitimerA3++;
 
                 if (minitimerA3 == 6)
@@ -282,7 +318,7 @@ namespace ButtonGiroxD
 
             if (an4 == 1)
             {
-                if (minitimerA4 == 1)
+             /*   if (minitimerA4 == 1)
                     buffer.Graphics.FillEllipse(Brushes.White, 330, 440, 140, 60);
 
                 if (minitimerA4 == 2)
@@ -293,7 +329,7 @@ namespace ButtonGiroxD
 
                 if (minitimerA4 == 4)
                     buffer.Graphics.FillEllipse(Brushes.White, 365, 465, 70, 20);
-
+             */
                 minitimerA4++;
 
                 if (minitimerA4 == 6)
@@ -306,7 +342,7 @@ namespace ButtonGiroxD
 
             if (an5 == 1)
             {
-                if (minitimerA5 == 1)
+               /* if (minitimerA5 == 1)
                     buffer.Graphics.FillEllipse(Brushes.White, 430, 440, 140, 60);
                
                 if (minitimerA5 == 2)
@@ -317,7 +353,7 @@ namespace ButtonGiroxD
 
                 if (minitimerA5 == 4)
                     buffer.Graphics.FillEllipse(Brushes.White, 465, 465, 70, 20);
-
+               */
                 minitimerA5++;
 
                 if (minitimerA5 == 6)
@@ -327,12 +363,7 @@ namespace ButtonGiroxD
                 }
             }
 
-            //SE DIBUJAN AL FINAL
-            foreach (CCirculo c in Circulos2)
-            {
-                c.dibujar(buffer.Graphics);
-
-            }
+          
 
             label1.Text ="Score :" + score.ToString() + " Count: " + phitcount.ToString();
 
@@ -349,8 +380,8 @@ namespace ButtonGiroxD
             
             megatimer++;
             */
-            buffer.Render();
 
+            
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -586,11 +617,18 @@ namespace ButtonGiroxD
             if(minitimer<=2)
             minitimer++;
 
-            
+          
+
+
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
             if (e.KeyCode == Keys.Z)
             {
                 tab1 = 0;
@@ -625,6 +663,7 @@ namespace ButtonGiroxD
             }
 
             minitimer = 0;
+
             
         }
 
@@ -637,6 +676,7 @@ namespace ButtonGiroxD
            
     
                wplayer.controls.play();
+            
                 wplayer2.controls.play();
 
                 wplayer2.settings.volume = 50;

@@ -145,7 +145,7 @@ namespace ButtonGiroxD
 
             if (hitLast == 1)
             {
-                if (y > 451 && y < 555)
+                if (y > 200 && y < 650)
                 {
                     hit = 1;
                 }
