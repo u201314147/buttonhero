@@ -67,7 +67,7 @@ namespace ButtonGiroxD
     
         public void dibujar(Graphics g)
         {
-            int y2 = Int32.Parse(y.ToString());
+            int y2 = Convert.ToInt32(y);
     
             if (y > -100 && y < 700)
             {
