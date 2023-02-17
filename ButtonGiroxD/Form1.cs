@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ButtonGiroxD
 {
@@ -22,7 +23,7 @@ namespace ButtonGiroxD
         int maxNotas = 0;
         double bpmadded = 0;
         double speed = 0;
-        double bpmcount =0;
+        double bpmcount = 0;
         int an1 = 0;
         int minitimerA1 = 0;
         int an2 = 0;
@@ -35,8 +36,8 @@ namespace ButtonGiroxD
         int minitimerA5 = 0;
         int score = 0;
         int phitcount = 1;
-      //  int megatimer = 0;
-          int minitimer = 0;
+        //  int megatimer = 0;
+        int minitimer = 0;
         int timeEspera = 0;
         int tab1;
         int tab2;
@@ -50,10 +51,10 @@ namespace ButtonGiroxD
         List<CCirculo> Circulo;
         List<CCirculo> Circulos2;
         System.Media.SoundPlayer player;
-                
+        Form2 form2;
                  WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
                  WMPLib.WindowsMediaPlayer wplayer2 = new WMPLib.WindowsMediaPlayer();
-       
+
 
 
         public Form1(double bpm, double repeattime, int maxNotes, int pTimeWait, double bpmadd, String pFile)
@@ -71,16 +72,20 @@ namespace ButtonGiroxD
             Circulo = new List<CCirculo>();
 
 
-             wplayer2.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
-          
+
+            wplayer2.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
+
 
             InitializeComponent();
 
-        button1.Enabled = false;
+             form2 = new Form2();
+            form2.Show();
+            this.Focus();
+            button1.Enabled = false;
             button1.Visible = false;
            tab1=0 ; tab2=0; tab3=0; tab4=0; tab5=0;
 
-           
+          
 
         }
 
@@ -92,7 +97,7 @@ namespace ButtonGiroxD
                 timer1.Enabled = false;
                 MessageBox.Show("TU PUNTAJE FINAL ES: " + score);
 
-                
+                form2.Close();
                 this.Close();
               }
            
@@ -173,7 +178,7 @@ namespace ButtonGiroxD
             buffer.Graphics.Clear(Color.Black);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 500, 500, 50);
 
-            buffer.Graphics.FillRectangle(Brushes.LightGray, 54, 1, 495, 600);
+           // buffer.Graphics.FillRectangle(Brushes.LightGray, 54, 1, 495, 600);
 
             /*buffer.Graphics.DrawRectangle(Pens.Black, 50, 500, 500, 50);
             buffer.Graphics.DrawRectangle(Pens.Black, 50, 450, 500, 50);
@@ -627,6 +632,7 @@ namespace ButtonGiroxD
         {
             if(e.KeyCode == Keys.Escape)
             {
+                form2.Close();
                 this.Close();
             }
             if (e.KeyCode == Keys.Z)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace ButtonGiroxD
 {
@@ -44,11 +45,13 @@ namespace ButtonGiroxD
                 MessageBox.Show(f.ToString());
             }
 
-            
 
+           
             Form1 form = new Form1(bmpspeed, repeattime, maxNotes, wait, bmpadd, music);
             form.Show();
+            
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
