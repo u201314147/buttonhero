@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ButtonGiroxD"
   ],
-  "SelectedNode": "\\ButtonGiroxD.sln",
+  "SelectedNode": "\\ButtonGiroxD\\Form1.Designer.cs",
   "PreviewInSolutionExplorer": false
 }

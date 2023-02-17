@@ -43,12 +43,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtSpeed
             // 
             this.txtSpeed.Location = new System.Drawing.Point(207, 47);
-            this.txtSpeed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSpeed.Margin = new System.Windows.Forms.Padding(4);
             this.txtSpeed.Name = "txtSpeed";
             this.txtSpeed.Size = new System.Drawing.Size(132, 22);
             this.txtSpeed.TabIndex = 0;
@@ -56,8 +57,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(179, 242);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(162, 281);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 1;
@@ -68,7 +69,7 @@
             // txtMaxNotes
             // 
             this.txtMaxNotes.Location = new System.Drawing.Point(207, 111);
-            this.txtMaxNotes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaxNotes.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaxNotes.Name = "txtMaxNotes";
             this.txtMaxNotes.Size = new System.Drawing.Size(132, 22);
             this.txtMaxNotes.TabIndex = 2;
@@ -77,7 +78,7 @@
             // txtRepeat
             // 
             this.txtRepeat.Location = new System.Drawing.Point(207, 79);
-            this.txtRepeat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRepeat.Margin = new System.Windows.Forms.Padding(4);
             this.txtRepeat.Name = "txtRepeat";
             this.txtRepeat.Size = new System.Drawing.Size(132, 22);
             this.txtRepeat.TabIndex = 2;
@@ -116,7 +117,7 @@
             // txtWaitTime
             // 
             this.txtWaitTime.Location = new System.Drawing.Point(207, 143);
-            this.txtWaitTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWaitTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtWaitTime.Name = "txtWaitTime";
             this.txtWaitTime.Size = new System.Drawing.Size(132, 22);
             this.txtWaitTime.TabIndex = 6;
@@ -145,7 +146,7 @@
             // txtMusic
             // 
             this.txtMusic.Location = new System.Drawing.Point(207, 175);
-            this.txtMusic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMusic.Margin = new System.Windows.Forms.Padding(4);
             this.txtMusic.Name = "txtMusic";
             this.txtMusic.Size = new System.Drawing.Size(132, 22);
             this.txtMusic.TabIndex = 9;
@@ -154,7 +155,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(348, 173);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(43, 28);
             this.button2.TabIndex = 10;
@@ -176,7 +177,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(207, 206);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(132, 22);
             this.textBox1.TabIndex = 11;
@@ -192,11 +193,21 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Durante el juego, puedes salir con la tecla ESCAPE";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(25, 246);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(333, 16);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "(si notas muy rapido las notas, cambia el punto a coma";
+            // 
             // FormStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 287);
+            this.ClientSize = new System.Drawing.Size(408, 322);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox1);
@@ -212,7 +223,7 @@
             this.Controls.Add(this.txtMaxNotes);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtSpeed);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormStart";
             this.Text = "Simulador Baile";
             this.Load += new System.EventHandler(this.FormStart_Load);
@@ -238,5 +249,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
